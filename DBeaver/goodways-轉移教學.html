@@ -1,0 +1,118 @@
+<div id="doc" class="markdown-body container-fluid comment-enabled" data-hard-breaks="true"><h1 id="goodways-轉移教學" data-id="goodways-轉移教學"><span>goodways 轉移教學</span></h1><h6 id="tags-柏榮數位整合" data-id="tags-柏榮數位整合"><span>tags: </span><code>柏榮數位整合</code></h6><h2 id="伺服器" data-id="伺服器"><span>伺服器</span></h2><ul>
+<li><span>192.53.116.194</span></li>
+</ul><h2 id="ssh-登入伺服器，二選一" data-id="ssh-登入伺服器，二選一"><span>ssh 登入伺服器，二選一</span></h2><ul>
+<li>
+<p><span>ssh c:.ssh\id_rsa </span><a href="mailto:amiwu@192.53.116.194" target="_blank" rel="noopener"><span>amiwu@192.53.116.194</span></a></p>
+<ul>
+<li><span>密碼：WoyurphC6k4X2VSY</span></li>
+</ul>
+</li>
+<li>
+<p><span>ssh c:.ssh\id_rsa </span><a href="mailto:zivhsiao@192.53.116.194" target="_blank" rel="noopener"><span>zivhsiao@192.53.116.194</span></a></p>
+<ul>
+<li><span>密碼： i8XwKjuOW70Tb6H4</span></li>
+</ul>
+</li>
+<li>
+<p><span>mariaDB 賬號密碼</span></p>
+<ul>
+<li><span>amiwu /86dMZzJd1bJOk0m2</span></li>
+<li><span>zivhsiao / 86dMZzJd1bJOk0m2</span></li>
+</ul>
+</li>
+</ul><h2 id="確定網域，假設-democomtw" data-id="確定網域，假設-democomtw"><span>確定網域，假設 </span><a href="http://demo.com.tw" target="_blank" rel="noopener"><span>demo.com.tw</span></a></h2><p><span>要先增加一個 demo 的資料夾</span></p><pre><code>sudo su
+密碼使用上面就可以
+
+mkdir /var/www/html/網域
+- 網域指的是 demo 就可以了
+</code></pre><h2 id="FileZilla-上傳檔案" data-id="FileZilla-上傳檔案"><span>FileZilla 上傳檔案</span></h2><p><span>建立一個名稱 demo</span></p><ul>
+<li><span>一般設定</span>
+<ul>
+<li><span>協定：SFTP</span></li>
+<li><span>主機：192.53.116.194</span></li>
+<li><span>登入形式：金鑰檔案</span></li>
+<li><span>使用者：zivhsiao</span></li>
+<li><span>金鑰檔案：d:.goodways_ssh\id_rsa</span></li>
+</ul>
+</li>
+<li><span>進階設定</span>
+<ul>
+<li><span>預設本地目録</span>
+<ul>
+<li><span>直接瀏覽實際存放的目録</span></li>
+</ul>
+</li>
+<li><span>預設遠端目録</span>
+<ul>
+<li><span>/var/www/html/demo</span></li>
+</ul>
+</li>
+<li><span>使用同步瀏覽打勾</span></li>
+</ul>
+</li>
+<li><span>直接檔案上傳就可以了</span></li>
+<li><span>記得 .htaccess, wp-content 這兩個都要設定成 777</span>
+<ul>
+<li><span>cmd 直接 ssh 後端主機</span>
+<ul>
+<li><span>chmod -R 777 wp-content</span></li>
+<li><span>chmod 777 .htaccess</span></li>
+</ul>
+</li>
+<li><span>或者直接用 FileZilla 直接修改</span>
+<ul>
+<li><span>記得要選擇“子目録以及檔案”就可以了</span></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><h2 id="資料庫" data-id="資料庫"><span>資料庫</span></h2><ul>
+<li><span>使用 DBeaver</span></li>
+<li><span>安裝</span>
+<ul>
+<li><a href="https://dbeaver.io/download/" target="_blank" rel="noopener"><span>直接從這裏下載並且安裝</span></a></li>
+<li><span>安裝完成，直接啓動</span></li>
+<li><span>然後參照下面的項目進行</span></li>
+<li><span>設定連結的資料庫</span>
+<ul>
+<li><span>ssh 一定先設定</span></li>
+<li><img src="https://raw.githubusercontent.com/renfu-her/repo-images/main/DBeaver/dbeaver-connection-1.png" alt="" loading="lazy"></li>
+<li><span>再來是主要</span></li>
+<li><img src="https://raw.githubusercontent.com/renfu-her/repo-images/main/DBeaver/dbeaver-connection-2.png" alt="" loading="lazy"></li>
+</ul>
+</li>
+<li><span>連綫資料庫</span>
+<ul>
+<li><img src="https://raw.githubusercontent.com/renfu-her/repo-images/main/DBeaver/dbeaver-db-1.png" alt="" loading="lazy"></li>
+</ul>
+</li>
+<li><span>點擊"數據庫"，滑鼠右鍵 -&gt; 新建資料庫</span>
+<ul>
+<li><img src="https://raw.githubusercontent.com/renfu-her/repo-images/main/DBeaver/create-database.png" alt="" loading="lazy"></li>
+</ul>
+</li>
+<li><span>填入你的資料庫名稱</span></li>
+</ul>
+</li>
+<li><span>導入 SQL</span>
+<ul>
+<li><span>針對你的資料庫，按下右鍵 -&gt; 工具 -&gt; 執行腳本</span></li>
+<li><img src="https://raw.githubusercontent.com/renfu-her/repo-images/main/DBeaver/import-sql.png" alt="" loading="lazy"></li>
+</ul>
+</li>
+<li><span>完成匯入的動作</span></li>
+</ul><h2 id="修改-DB-的資料" data-id="修改-DB-的資料"><span>修改 DB 的資料</span></h2><ul>
+<li><span>修改</span>
+<ul>
+<li><span>define(‘DB_NAME’, ‘資料庫名稱’);</span></li>
+<li><span>define(‘DB_USER’, ‘zivhsiao’);</span></li>
+<li><span>define(‘DB_PASSWORD’, ‘86dMZzJd1bJOk0m2’);</span></li>
+<li><span>define(‘DB_HOST’, ‘localhost’);</span></li>
+</ul>
+</li>
+<li><span>增加一項</span>
+<ul>
+<li><span>define(‘FS_METHOD’, ‘direct’);</span></li>
+</ul>
+</li>
+</ul><p><span>這樣就設置完成</span></p></div>
